@@ -5,9 +5,10 @@ from mysql.connector import connect, connection, Error
 
 class ConnectionHandler:
 
-    def __inint__(self):
+    def __init__(self):
         self.read_from_config()
 
+    # noinspection PyAttributeOutsideInit
     def read_from_config(self):
         with open("config.json", "r") as f:
             data = json.load(f)
@@ -15,11 +16,11 @@ class ConnectionHandler:
         self.host = data["host"]
         self.database = data["database"]
         self.user = data["user"]
-        self.password = data["Password"]
+        self.password = data["password"]
 
     def do_test(self):
-        with connect(host="localhost", database="span", user="root", password="") as cnn:
-            select_query = "SELECT * FROM department ORDER by department_id"
+        with connect(host="localhost", database="span", user="root", password="root") as cnn:
+            select_query = "SELECT * FROM departments ORDER by department_id"
             with cnn.cursor() as cursor:
                 cursor.execute(select_query)
                 result = cursor.fetchall()
@@ -44,7 +45,6 @@ class ConnectionHandler:
             user=self.user,
             password=self.password,
         )
-
 
 
 my_connection_handler = ConnectionHandler()
