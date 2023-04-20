@@ -1,6 +1,20 @@
 import tkinter as tk
 
 from arnion.data.employees_data import EmployeeDataHandler
+from arnion.ui.departments_reports_ui import DepartmentsReportWindow
+from arnion.ui.employees_reports_ui import EmployeesReportWindow
+
+
+class DepartmentsReportWindow:
+ from arnion.ui.departments_reports_ui import DepartmentsReportWindow
+
+
+class EmployeesDataHandler:
+    pass
+
+
+class EmployeesReportHandler:
+    pass
 
 
 class MainWindow:
@@ -21,12 +35,12 @@ class MainWindow:
 
         # Добавление кнопки данных "Отделы"
         btn_report = tk.Button(self.window, text="Отделы",
-                               font=('Helvetica', 10, 'bold'), bg='#ccffcc')
+                               font=('Helvetica', 10, 'bold'), bg='#ccffcc', command=self.do_report_departments)
         btn_report.place(x=25, y=100, width=120, height=50)
 
         # Добавление кнопки данных "Сотрудники"
         btn_close = tk.Button(self.window, text="Сотрудники",
-                              font=('Helvetica', 10, 'bold'), bg='#ccffcc')
+                              font=('Helvetica', 10, 'bold'), bg='#ccffcc', command=self.do_report_employees)
         btn_close.place(x=160, y=100, width=120, height=50)
 
         # Добавление кнопки заголовка отчетов
@@ -35,12 +49,12 @@ class MainWindow:
 
         # Добавление кнопки заголовка "Отделы"
         btn_report = tk.Button(self.window, text="Отделы",
-                               font=('Helvetica', 10, 'bold'), bg='#ccffcc')
+                               font=('Helvetica', 10, 'bold'), bg='#ccffcc', command=self.do_report_departments)
         btn_report.place(x=25, y=200, width=120, height=50)
 
         # Добавление кнопки отчетов "Сотрудники"
         btn_close = tk.Button(self.window, text="Сотрудники",
-                              font=('Helvetica', 10, 'bold'), bg='#ccffcc')
+                              font=('Helvetica', 10, 'bold'), bg='#ccffcc', command=self.do_report_employees)
         btn_close.place(x=160, y=200, width=120, height=50)
 
         # Добавление кнопки закрытия "Тест"
@@ -58,6 +72,16 @@ class MainWindow:
         employees = EmployeeDataHandler.select_list()
         for employee in employees:
             print(employee.get_full_name())
+
+    # Открытие отчета "Отделы"
+    def do_report_departments(self):
+        rpt = DepartmentsReportWindow()
+        rpt.open()
+
+    # Открытие отчета "Сотрудники"
+    def do_report_employees(self):
+        rpt = EmployeesReportWindow()
+        rpt.open()
 
     # Функция закрытия главного окна программы
     def close(self):

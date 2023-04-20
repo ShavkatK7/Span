@@ -5,6 +5,7 @@ from arnion.db.mysql_connection import my_connection_handler
 from arnion.ui.main_window import MainWindow
 
 
+
 # Точка входа в программу
 def main():
 

@@ -40,3 +40,4 @@ VALUES("Галина","Руслановна","Маргаритова", 1);
 
 INSERT INTO employees (first_name,middle_name,last_name,department_id)
 VALUES("Артём","Николаевич","Григорин", 2);
+
