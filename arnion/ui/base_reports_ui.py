@@ -1,3 +1,4 @@
+
 class ReportWindow:
 
     def __init__(self, parameters):
@@ -11,3 +12,4 @@ class ReportWindow:
 
     def close(self):
         pass
+    

@@ -13,10 +13,10 @@ class DepartmentDataHandler:
         departments = []
         try:
             with my_connection_handler.get_connection() as cnn:
-                select_query = "SELECT* FROM departments ORDER BY department_id"
-                with cnn.cursor() as cursor:
-                    cursor.execute(select_query)
-                    result = cursor.fetchall()
+                select_query = "SELECT * FROM departments ORDER BY department_id"
+                with cnn.cursor() as cusor:
+                    cusor.execute(select_query)
+                    result = cusor.fetchall()
                     for row in result:
                         departments.append(DepartmentDataHandler.get_department(row))
             return departments
@@ -27,10 +27,10 @@ class DepartmentDataHandler:
     def select_by_id(department_id: int):
         try:
             with my_connection_handler.get_connection() as cnn:
-                select_query = "SLELCT * FROM departments  WHERE  department" + str(department_id)
-                with cnn.cursor() as cursor:
-                    cursor.execute(select_query)
-                    row = cursor.fetchone()
+                select_query = "SELECT * FROM departments WHERE department_id=" + str(department_id)
+                with cnn.cursor() as cusor:
+                    cusor.execute(select_query)
+                    row = cusor.fetchone()
                     department = DepartmentDataHandler.get_department(row)
                     return department
         except:
@@ -38,4 +38,38 @@ class DepartmentDataHandler:
 
     @staticmethod
     def get_department(row):
-        return DepartmentDataObject(row[0], row[1], row[2], row[3], row[4],row[5])
+        return DepartmentDataObject(row[0],row[1])
+
+    @staticmethod
+    def insert(department: DepartmentDataObject):
+        try:
+            with my_connection_handler.get_connection() as cnn:
+                insert_query = "INSERT INTO departments (department_name) VALUES ('"\
+                             + department.department_name + "')"
+                with cnn.cursor() as cusor:
+                    cusor.execute(insert_query)
+                    department.department_id = cusor.lastrowid
+        except:
+            raise
+
+    @staticmethod
+    def update(department: DepartmentDataObject):
+        try:
+            with my_connection_handler.get_connection() as cnn:
+                insert_query = "UPDATE departments SET department_name = '" \
+                               + department.department_name + "' " \
+                                + "WHERE department_id =" + str(department.department_id)
+                with cnn.cursor() as cusor:
+                    cusor.execute(insert_query)
+        except:
+            raise
+
+    @staticmethod
+    def delete_by_id(department_id: int):
+        try:
+            with my_connection_handler.get_connection() as cnn:
+                insert_query = "DELETE FROM departments WHERE department_id =" + str(department_id)
+                with cnn.cursor() as cusor:
+                    cusor.execute(insert_query)
+        except:
+            raise
