@@ -1,11 +1,10 @@
-
 import copy
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox as mb
 
 from arnion.data.departments_data import DepartmentDataHandler, DepartmentDataObject
-from arnion.data.employees_data import   EmployeeDataHandler, EmployeeDataObject
+from arnion.data.employees_data import EmployeeDataHandler, EmployeeDataObject
 
 
 class EmployeesWindow:
@@ -24,10 +23,9 @@ class EmployeesWindow:
         # Контейнер для списка и полосы прокрутки
         self.frame = tk.Frame(self.window)
 
-
         # Добавление окна вывода текста
-        self.lbox_data_rows = tk.Listbox(self.frame, selectmode='single', activestyle='none' ,
-                                           font=('Courier New' , 10, 'bold'))
+        self.lbox_data_rows = tk.Listbox(self.frame, selectmode='single', activestyle='none',
+                                         font=('Courier New', 10, 'bold'))
         self.lbox_data_rows.place(x=0, y=0, width=450, height=300)
 
         self.scrollbox = tk.Scrollbar(self.frame, orient="vertical")
@@ -41,7 +39,7 @@ class EmployeesWindow:
 
         # Добвавление кнопки "Добавить"
         self.btn_add = tk.Button(self.window, text="Добавить",
-                                 font=('Helvetica', 10, 'bold'),bg='#ccffff', command=self.add_record)
+                                 font=('Helvetica', 10, 'bold'), bg='#ccffff', command=self.add_record)
         self.btn_add.place(x=20, y=390, width=90, height=30)
 
         # Добвавление кнопки "Изменить"
@@ -51,37 +49,45 @@ class EmployeesWindow:
 
         # Добвавление кнопки "Удалить"
         self.btn_delete = tk.Button(self.window, text="Удалить",
-                                  font=('Helvetica', 10, 'bold'), bg='#ccffff', command=self.delete_record)
+                                    font=('Helvetica', 10, 'bold'), bg='#ccffff', command=self.delete_record)
         self.btn_delete.place(x=220, y=390, width=90, height=30)
 
         # Добвавление кнопки закрытия окна
         self.btn_close = tk.Button(self.window, text="Закрыть",
-                                 font=('Helvetica', 10, 'bold'), bg='#ccffсс', command=self.close)
+                                   font=('Helvetica', 10, 'bold'), bg='#ccffсс', command=self.close)
         self.btn_close.place(x=390, y=390, width=90, height=30)
+
 
 # Функция заполнения списка
 def init_data_rows(self):
-        self.data_rows = EmployeeDataHandler.select_list()
-   for data_row in self.data_rows:
-        self.lbox_data_rows.insert('end', data_row.get_full_name())
-   if len(self.data_rows) > 0:
-        self.lbox_data_rows.select_set(0)
+    self.data_rows = EmployeeDataHandler.select_list()
+
+
+for data_row in self.data_rows:
+    self.lbox_data_rows.insert('end', data_row.get_full_name())
+if len(self.data_rows) > 0:
+    self.lbox_data_rows.select_set(0)
+
 
 # Функция добавления записи
 def add_record(self):
     pass
 
+
 # Функция завершение добавления записи
 def add_record_callback(self, added_data_row: EmployeeDataObject):
     pass
+
 
 # Функция редактирование записи
 def edit_record(self):
     pass
 
+
 # Функция завершения редактирования записи
 def edit_record_callback(self, edited_data_row: EmployeeDataObject):
     pass
+
 
 # Функция удаления записи
 def delete_record(self):
@@ -95,9 +101,11 @@ def delete_record(self):
     self.data_rows.pop(self.selection)
     self.lbox_data_rows.delete(self.selection)
 
+
 # Функция обновления списка
 def refresh_listbox(self, selection: int, value: str):
     pass
+
 
 # Функция открытия окна
 def open(self):
@@ -105,6 +113,7 @@ def open(self):
     self.window.focus_force()
     # Перевод всех команд на создание окна
     self.window.grab_set()
+
 
 # Функция закрытия этого окна
 def close(self):
